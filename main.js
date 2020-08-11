@@ -15,7 +15,7 @@ async function loadRepos() {
             const resArr = res['items'];
             clearUsers();
             resArr.forEach(el => {
-                const elementreposList = createElement('li'); //Нужно добавить класс для стилизации 
+                const elementreposList = createElement('li', 'list-group-item'); //Нужно добавить класс для стилизации 
                 elementreposList.textContent = el.name;
                 reposList.append(elementreposList);
                 
@@ -41,12 +41,17 @@ async function loadRepos() {
         })
 
     }else {
-        clearUsers()
+        clearUsers();
     }
 }
 
 loadRepos = debounce(loadRepos, 500);
 input.addEventListener('keyup', loadRepos);
+input.addEventListener('keyup' , () => {
+    if(!input.value) {
+        document.querySelector('.container').innerHTML = '';
+    }
+})
 function createElement(elementName, className) {
     const element = document.createElement(elementName);
     if (className) {
