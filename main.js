@@ -23,7 +23,7 @@ async function loadRepos() {
 
                     const container = createElement('div', 'container');
                     reposList.style.display = 'none';
-                    mainContainer.append(container);
+                    document.querySelector('.form-group').append(container);
                     const spanName = createElement('div');
                     spanName.textContent = `Name: ${el.name} `
                     const spanOwner = createElement('div');
