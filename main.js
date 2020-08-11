@@ -13,12 +13,12 @@ async function loadRepos() {
         }).then(res => {
             console.log(res['items']);
             const resArr = res['items'];
+            clearUsers();
             resArr.forEach(el => {
-
                 const elementreposList = createElement('li'); //Нужно добавить класс для стилизации 
                 elementreposList.textContent = el.name;
                 reposList.append(elementreposList);
-
+                
                 function clickHandler() {
 
                     const container = createElement('div', 'container');
@@ -47,12 +47,6 @@ async function loadRepos() {
 
 loadRepos = debounce(loadRepos, 500);
 input.addEventListener('keyup', loadRepos);
-// input.addEventListener('keyup', () => {
-//     if (!input.value) {
-//         reposList.innerHTML = '';
-//         document.querySelector('.container').innerHTML = '';
-//     }
-// })
 function createElement(elementName, className) {
     const element = document.createElement(elementName);
     if (className) {
@@ -73,3 +67,4 @@ function debounce(fn, ms) {
 function clearUsers () {
     reposList.innerHTML = '';
 }
+
