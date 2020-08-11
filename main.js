@@ -4,6 +4,7 @@ const URL = 'https://api.github.com/';
 const reposList = document.querySelector('.repositories-js');
 const mainContainer = document.querySelector('.main-js');
 async function loadRepos() {
+    if(input.value) {
     return await fetch(`${URL}search/repositories?q=${input.value}&per_page=${USER_PER_PAGE}`)
         .then(res => {
             if (res.ok) {
@@ -20,7 +21,7 @@ async function loadRepos() {
 
                 function clickHandler() {
 
-                    const container = createElement('div','container');
+                    const container = createElement('div', 'container');
                     reposList.style.display = 'none';
                     mainContainer.append(container);
                     const spanName = createElement('div');
@@ -38,16 +39,20 @@ async function loadRepos() {
 
             })
         })
+
+    }else {
+        clearUsers()
+    }
 }
 
 loadRepos = debounce(loadRepos, 500);
 input.addEventListener('keyup', loadRepos);
-input.addEventListener('keyup', () => {
-    if (!input.value) {
-        reposList.innerHTML = '';
-        document.querySelector('.container').innerHTML = '';
-    }
-})
+// input.addEventListener('keyup', () => {
+//     if (!input.value) {
+//         reposList.innerHTML = '';
+//         document.querySelector('.container').innerHTML = '';
+//     }
+// })
 function createElement(elementName, className) {
     const element = document.createElement(elementName);
     if (className) {
@@ -65,3 +70,6 @@ function debounce(fn, ms) {
     }
 }
 
+function clearUsers () {
+    reposList.innerHTML = '';
+}
