@@ -11,11 +11,10 @@ async function loadRepos() {
                     return res.json();
                 }
             }).then(res => {
-                console.log(res['items']);
                 const resArr = res['items'];
                 clearUsers();
                 resArr.forEach(el => {
-                    const elementreposList = createElement('li', 'list-group-item'); //Нужно добавить класс для стилизации 
+                    const elementreposList = createElement('li', 'list-group-item'); 
                     elementreposList.textContent = el.name;
                     reposList.append(elementreposList);
 
@@ -43,8 +42,11 @@ async function loadRepos() {
                         commonElForInfo.append(spanName);
                         commonElForInfo.append(spanOwner);
                         commonElForInfo.append(spanStars);
-                        document.querySelector('.icon').addEventListener('click', () => {
-                            document.querySelector('.container').classList.add('animation')
+                        document.querySelector('.icon').addEventListener('click', (e) => {
+                            e.preventDefault();
+                            document.querySelector('.container').style.top = '-200px';
+                            input.value = '';
+                            setTimeout(() => document.location.reload(true),2000)
                         })
                     }
                     elementreposList.addEventListener('click', clickHandler);
