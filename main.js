@@ -32,6 +32,8 @@ async function loadRepos() {
                         const spanStars = createElement('div');
                         spanStars.textContent = `Stars: ${el.stargazers_count} `;
                         const icon = createElement('button', 'icon');
+                        icon.classList.add('btn');
+                        
                         const elemCLose = createElement('span', 'close');
 
                         const commonElForInfo = createElement('div', 'common');
