@@ -22,7 +22,7 @@
     padding-right: 0;
     border-radius: 3px;
     position: relative;
-    transition: top 2s;
+    transition: top 5s;
     top: 0px;
 }
 .commonElForInfo {
@@ -67,8 +67,8 @@
     box-shadow: none;
 }
 .animation {
-position: relative;
-top: -200px;
+position: absolute;
+top: -1000px;
 
 }
 .wrapper-header {

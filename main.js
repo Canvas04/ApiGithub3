@@ -44,7 +44,7 @@ async function loadRepos() {
                         commonElForInfo.append(spanStars);
                         document.querySelector('.icon').addEventListener('click', (e) => {
                             e.preventDefault();
-                            document.querySelector('.container').style.top = '-200px';
+                            document.querySelector('.container').style.top = '-500px';
                             input.value = '';
                             setTimeout(() => document.location.reload(true),2000)
                         })
