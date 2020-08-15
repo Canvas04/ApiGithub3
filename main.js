@@ -4,7 +4,7 @@ const URL = 'https://api.github.com/';
 const reposList = document.querySelector('.repositories-js');
 const mainContainer = document.querySelector('.main-js');
 async function loadRepos() {
-    if (input.value) {
+    
         return await fetch(`${URL}search/repositories?q=${input.value}&per_page=${USER_PER_PAGE}`)
             .then(res => {
                 if (res.ok) {
@@ -12,17 +12,16 @@ async function loadRepos() {
                 }
             }).then(res => {
                 const resArr = res['items'];
-                clearUsers();
+                console.log(...resArr);
+              
                 resArr.forEach(el => {
-                    const elementreposList = createElement('li', 'list-group-item'); 
-                    elementreposList.textContent = el.name;
-                    reposList.append(elementreposList);
+                    const elementReposList = createElement('li', 'list-group-item');
+                    elementReposList.textContent = el.name;
+                    reposList.append(elementReposList);
 
                     function clickHandler() {
-
                         const container = createElement('div', 'container');
-
-                        reposList.style.display = 'none';
+                        reposList.innerHTML = '';
                         document.querySelector('.form-group').append(container);
                         const spanName = createElement('div');
                         spanName.textContent = `Name: ${el.name} `
@@ -32,7 +31,7 @@ async function loadRepos() {
                         spanStars.textContent = `Stars: ${el.stargazers_count} `;
                         const icon = createElement('button', 'icon');
                         icon.classList.add('btn');
-                        
+
                         const elemCLose = createElement('span', 'close');
 
                         const commonElForInfo = createElement('div', 'common');
@@ -46,18 +45,15 @@ async function loadRepos() {
                             e.preventDefault();
                             document.querySelector('.container').style.top = '-500px';
                             input.value = '';
-                            setTimeout(() => document.location.reload(true),2000)
+                            // setTimeout(() => document.location.reload(true), 2000)
                         })
                     }
-                    elementreposList.addEventListener('click', clickHandler);
+                    elementReposList.addEventListener('click', clickHandler);
 
 
-                })
-            })
+                });
+            });
 
-    } else {
-        clearUsers();
-    }
 }
 
 loadRepos = debounce(loadRepos, 500);
@@ -70,7 +66,7 @@ input.addEventListener('keyup', () => {
 function createElement(elementName, className) {
     const element = document.createElement(elementName);
     if (className) {
-        element.classList.toggle(className);
+        element.classList.add(className);
     }
     return element;
 }
