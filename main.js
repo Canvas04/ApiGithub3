@@ -4,7 +4,7 @@ const URL = 'https://api.github.com/';
 const reposList = document.querySelector('.repositories-js');
 const mainContainer = document.querySelector('.main-js');
 async function loadRepos() {
-    
+    if (input.value) {
         return await fetch(`${URL}search/repositories?q=${input.value}&per_page=${USER_PER_PAGE}`)
             .then(res => {
                 if (res.ok) {
@@ -13,8 +13,9 @@ async function loadRepos() {
             }).then(res => {
                 const resArr = res['items'];
                 console.log(...resArr);
-              
+                clearUsers();
                 resArr.forEach(el => {
+
                     const elementReposList = createElement('li', 'list-group-item');
                     elementReposList.textContent = el.name;
                     reposList.append(elementReposList);
@@ -41,18 +42,27 @@ async function loadRepos() {
                         commonElForInfo.append(spanName);
                         commonElForInfo.append(spanOwner);
                         commonElForInfo.append(spanStars);
-                        document.querySelector('.icon').addEventListener('click', (e) => {
+                        function clearContainer() {
+                            container.style.display = 'none';
+                        }
+                        container.querySelector('.icon').addEventListener('click', (e) => {
                             e.preventDefault();
-                            document.querySelector('.container').style.top = '-500px';
+                            reposList.style.display = 'none';
+                            container.style.top = '-500px';
                             input.value = '';
-                            // setTimeout(() => document.location.reload(true), 2000)
+                            setTimeout(clearContainer, 2000);
                         })
                     }
                     elementReposList.addEventListener('click', clickHandler);
 
 
+
+
                 });
             });
+    } else {
+        clearUsers();
+    }
 
 }
 
