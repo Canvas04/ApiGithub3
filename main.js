@@ -54,11 +54,8 @@ async function loadRepos() {
                         })
                     }
                     elementReposList.addEventListener('click', clickHandler);
-
-
-
-
                 });
+                reposList.style.display = 'block'
             });
     } else {
         clearUsers();
@@ -68,11 +65,11 @@ async function loadRepos() {
 
 loadRepos = debounce(loadRepos, 500);
 input.addEventListener('keyup', loadRepos);
-input.addEventListener('keyup', () => {
-    if (!input.value) {
-        document.querySelector('.container').innerHTML = '';
-    }
-})
+// input.addEventListener('keyup', () => {
+//     if (!input.value) {
+//         document.querySelector('.container').innerHTML = '';
+//     }
+// })
 function createElement(elementName, className) {
     const element = document.createElement(elementName);
     if (className) {
